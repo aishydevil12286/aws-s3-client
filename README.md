@@ -27,14 +27,13 @@ The application connects to Amazon's <a href="http://aws.amazon.com/s3" target="
 	<pre>
   	java -jar aws-s3-java.jar
 	</pre>	
+	<span style="background-color: #ffffcc; color:red">Alternatively, you can use a tool like Eclipse to build the application and run it</span>.
 	</li>
 </ol>
 
 <p>
 	<b>Note</b>.  See <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html" target="_blank">Bucket Restrictions and Limitations</a>.
 </p>
-
-<span style="background-color: #ffffcc; color:red">Alternatively, you can use a tool like Eclipse to build the application and run it</span>.
 
 <h2>License</h2>
 This sample application is distributed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>.
