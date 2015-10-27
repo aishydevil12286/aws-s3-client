@@ -6,6 +6,9 @@ For details see:
 	<li><a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingObjects.html" target="_blank">Working with Amazon S3 Objects</a></li>
 </ul>
 
+Also, see the companion blog post at this location: <a href="http://acloudysky.com/build-aws-s3-client-application/" target="_blank">Build AWS S3 
+Client Application</a>.
+
 <h2>Prerequisites</h2>
 You must have Maven installed. The dependencies are satisfied by building the Maven package.
 
