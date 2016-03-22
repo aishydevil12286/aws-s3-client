@@ -35,6 +35,19 @@ The application connects to Amazon's <a href="http://aws.amazon.com/s3" target="
 </ol>
 
 <p>
+Assure that the pom.xml file has the following dependency, otherwise you'll get a runtime error when executing the jar. 
+<code>
+	<pre>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.9</version>
+		</dependency>
+	</pre>
+	
+</code>
+</p>
+<p>
 	<b>Note</b>.  See <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html" target="_blank">Bucket Restrictions and Limitations</a>. See also <a href="http://acloudysky.com/cloud-application-common-tasks/#createrunnablejar" target="_blank">Create Runnable JAR</a>.
 </p>
 
