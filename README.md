@@ -35,7 +35,7 @@ The application connects to Amazon's <a href="http://aws.amazon.com/s3" target="
 </ol>
 
 <p>
-	<b>Note</b>.  See <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html" target="_blank">Bucket Restrictions and Limitations</a>. See also <a href="http://acloudysky.com/cloud-application-common-tasks#createrunnablejar/" target="_blank">Create Runnable JAR</a>.
+	<b>Note</b>.  See <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html" target="_blank">Bucket Restrictions and Limitations</a>. See also <a href="http://acloudysky.com/cloud-application-common-tasks/#createrunnablejar" target="_blank">Create Runnable JAR</a>.
 </p>
 
 <h2>License</h2>
