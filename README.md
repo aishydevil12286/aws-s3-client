@@ -38,11 +38,11 @@ The application connects to Amazon's <a href="http://aws.amazon.com/s3" target="
 Assure that the pom.xml file has the following dependency, otherwise you'll get a runtime error when executing the jar. 
 <code>
 	<pre>
-		<dependency>
-			<groupId>joda-time</groupId>
-			<artifactId>joda-time</artifactId>
-			<version>2.9</version>
-		</dependency>
+		&lt;dependency&gt;
+			&lt;groupId&gt;joda-time&lt;/groupId&gt;
+			&lt;artifactId&gt;joda-time&lt;/artifactId&gt;
+			&lt;version&gt;2.9&lt;/version&gt;
+		&lt;/dependency&gt;
 	</pre>
 	
 </code>
