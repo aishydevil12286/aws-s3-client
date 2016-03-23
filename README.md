@@ -46,8 +46,6 @@ Assure that the pom.xml file has the following dependency, otherwise you'll get 
 	</pre>
 	
 </code>
-[test](http://mvnrepository.com/artifact/joda-time/joda-time/2.8.1){target="_blank"}
-
 See <a href="http://mvnrepository.com/artifact/joda-time/joda-time/2.8.1" target="_blank">Joda Time » 2.8.1</a>.
 </p>
 <p>
