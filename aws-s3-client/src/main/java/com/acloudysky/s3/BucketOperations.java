@@ -22,9 +22,12 @@ import java.util.List;
 
 
 /***
- * Perform S3 bucket operations. 
- * Each method calls the related AWS s3 API. For more information, see 
+ * Performs S3 bucket operations. 
+ * Each method calls the related AWS S3 API. 
+ * <p>
+ * For more information, see 
  * <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html" target="_blank">Working with Amazon S3 Buckets</a>.
+ * </p>
  * @author Michael Miele
  *
  */
@@ -34,7 +37,7 @@ public class BucketOperations {
 	private static AmazonS3 s3Client;
 	
 	/***
-	 * Initialize global status variables.
+	 * Initializes global status variables.
 	 * @param authorizedClient Client authorized to access the S3 service.
 	 */
 	public static void InitBucketOperations(AmazonS3 authorizedClient) {
@@ -42,7 +45,7 @@ public class BucketOperations {
 	}
 	
     /**
-     * Create a bucket 
+     * Creates a bucket 
      * <b>Notes</b>
      *  <ul>
      *		<li>Amazon S3 bucket names are globally unique. 
@@ -83,7 +86,7 @@ public class BucketOperations {
 	
 	
 	/**
-	 * List the buckets in the client's account.
+	 * Lists the buckets in the client's account.
 	 * @throws IOException Error encountered while listing buckets
 	 */
 	public static void ListBuckets() throws IOException {
@@ -127,7 +130,7 @@ public class BucketOperations {
 
 	
 	/**
-	 * Delete a bucket
+	 * Deletes a bucket
 	 * The name of the bucket to delete
 	 * @param bucketName The name of the bucket to delete
 	 * @throws IOException Error encountered while deleting the bucket

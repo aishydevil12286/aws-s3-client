@@ -23,9 +23,12 @@ import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 
 /***
- * Perform S3 object operations. 
- * Each method calls the related AWS s3 API. For more information, see 
+ * Performs S3 object operations. 
+ * Each method calls the related AWS s3 API. 
+ * <p>
+ * For more information, see 
  * <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingObjects.html" target="_blank">Working with Amazon S3 Objects</a>.
+ * </p>
  * @author Michael Miele
  *
  */
@@ -36,7 +39,7 @@ public class ObjectOperations {
 	
 	
 	/***
-	 * Initialize global status variables.
+	 * Initializes global status variables.
 	 * @param authorizedClient Client authorized to access the S3 service.
 	 */
 	public static void InitObjectOperations(AmazonS3 authorizedClient) {
@@ -49,7 +52,7 @@ public class ObjectOperations {
 	 */
 	
 	 /**
-	  * Create a temporary test file with text data to demonstrate uploading a file
+	  * Creates a temporary test file with text data to demonstrate uploading a file
 	  * to Amazon S3
 	  * @return A newly created temporary file with text data.
 	  * @throws IOException
@@ -70,7 +73,7 @@ public class ObjectOperations {
     }
     
     /**
-     * Display the contents of the specified input stream as text.
+     * Displays the contents of the specified input stream as text.
      * @param input The input stream to display as text.
      * @throws IOException
      */
@@ -86,7 +89,7 @@ public class ObjectOperations {
     }
 	    
     /***
-     * Upload an object to a bucket 
+     * Uploads an object to a bucket 
      * <b>Notes</b> 
      * <ul>
      *   <li>You can easily upload a file to S3, or upload directly an 
@@ -129,7 +132,7 @@ public class ObjectOperations {
 	
     
 	/***
-	 * Download an object. 
+	 * Downloads an object. 
 	 * <b>Notes</b>
 	 * <ul>
 	 * 	<li>When you download an object, you get all of the object's metadata and a stream 
@@ -188,9 +191,9 @@ public class ObjectOperations {
     }
 	
 	/***
-	 * List objects contained in the specified object.
+	 * Lists objects contained in the specified bucket.
 	 * @param bucketName The name of the bucket that contains the objects
-	 * @throws IOException Error encountered while lisitng the objects
+	 * @throws IOException Error encountered while listing the objects
 	 */
 	public static void ListObject(String bucketName) throws IOException {			
 		
@@ -198,8 +201,8 @@ public class ObjectOperations {
 			 	System.out.println("Listing objects");
 			   
 	            ListObjectsRequest listObjectsRequest = new ListObjectsRequest()
-	            	.withBucketName(bucketName)
-	            	.withPrefix("m");
+	            	.withBucketName(bucketName);
+	            	// .withPrefix("m");
 	            ObjectListing objectListing;            
 	            do {
 	                objectListing = s3Client.listObjects(listObjectsRequest);
@@ -233,7 +236,7 @@ public class ObjectOperations {
  	}
 	
 	/***
-	 * Delete object in a non-versioned bucket
+	 * Deletes object in a non-versioned bucket
 	 * @param bucketName he name of the bucket that contains the object
 	 * @param keyName The name of the object to delete
 	 * @throws IOException Error encountered while deleting the object
