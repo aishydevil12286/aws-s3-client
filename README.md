@@ -1,5 +1,5 @@
 # aws-s3-client
-Java console application showing how to interact with Amazon S3.
+Java console application showing how to interact with Amazon S3. 
 For details see:
 <ul>
 	<li><a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html" target="_blank">Working with Amazon S3 Buckets</a></li>
