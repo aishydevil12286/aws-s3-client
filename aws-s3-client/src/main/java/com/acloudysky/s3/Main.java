@@ -1,17 +1,15 @@
 package com.acloudysky.s3;
 
-import com.acloudysky.s3.S3ClientAuthentication;
-import com.acloudysky.s3.SimpleUI;
-import com.acloudysky.s3.Utility;
-import com.amazonaws.AmazonClientException;
+import com.acloudysky.s3.ClientAuthentication;
 import com.amazonaws.AmazonServiceException;
+import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
 
-import com.acloudysky.auth.AwsClientAuthencation;
 
 /***
- *Instantiates the S3 authenticated service client, initializes the operations and the UI classes.  
+ *Instantiate the S3 authorized service client, initialize the operations and the UI classes.  
  *Before running the code, you need to set up your AWS security credentials. You can do this by creating a 
  *file named "credentials" at ~/.aws/ (C:\Users\USER_NAME.aws\ for Windows users) and saving the following lines in 
  *the file:
@@ -28,81 +26,63 @@ import com.acloudysky.auth.AwsClientAuthencation;
  */
 public class Main {
 
-	private static SimpleUI sui;
-	
-	// Authenticated EC2 client.
-	private static AmazonS3 s3Client;
-	
-	// Selected region. String value such as "us-west-2".
-	private static String region = null;
-	
-	// Selected S3 region. Enumerated value.
-	private static Regions currentRegion; 
-	
 	/**
-	 * Instantiates the S3 client, initializes the operation classes. 
-	 * Instantiates the SimpleUI class to display the selection menu and process the user's input. 
+	 * Instantiate the S3 client, initialize the operation classes. 
+	 * Instantiate the SimpleUI class to display the selection menu and process the user's input. 
 	 * @see SimpleUI#SimpleUI()
 	 * @see BucketOperations#InitBucketOperations(AmazonS3)
 	 * @see ObjectOperations#InitObjectOperations(AmazonS3)
 	 * @param args; 
-	 *  args[0] = AWS region
+	 *  args[0] = Your name
+	 *  args[1] = Greeting message
 	 * 
 	 */
 	public static void main(String[] args) {
-		// Display application menu.
-		Utility.displayWelcomeMessage("AWS S3");
+		
+		AmazonS3 s3Client = null;
+		String name = null, topic = null;
 		
 		// Read input parameters.
 		try {
-				region = args[0];
-				// System.out.println(region);
+				name = args[0];
+				topic = args[1];
 		}
 		catch (Exception e) {
 			System.out.println("IO error trying to read application input! Assigning default values.");
 			// Assign default values if none are passed.
 			if (args.length==0) {
-				region = "us-west-2";
+				name = "User";
+				topic = "AWS S3 client console application";
 			}
 			else {
 				System.out.println("IO error trying to read application input!");
 				System.exit(1); 
 			}
 		}
-
+		
+		// Print greeting message.
+		String startGreetings = String.format("Hello %s let's start %s", name, topic);
+		System.out.println(startGreetings);
 		
 		try {
-			
-			// Instantiate AwsClientAuthencation class.
-			AwsClientAuthencation s3ClientAuth = new AwsClientAuthencation();
-		
-			// Obtain authenticated EC2 client.
-			s3Client = s3ClientAuth.getAuthenticatedS3Client();
-		
+        	// Obtain authenticated S3 client.
+			s3Client = ClientAuthentication.getAuthorizedS3Client();
 			// Set region.
-			currentRegion = Utility.getRegion(region);
-			if (currentRegion != null)
-				s3ClientAuth.setS3Region(currentRegion);
+			Region usEast1 = Region.getRegion(Regions.US_EAST_1);
+	        ClientAuthentication.setS3Region(usEast1);
 		} 
-	    catch (AmazonServiceException ase) {
-	        	StringBuffer err = new StringBuffer();
-	        	
-	        	err.append(("Caught an AmazonServiceException, which means your request made it "
-	                      + "to Amazon EC2, but was rejected with an error response for some reason."));
-	       	   	err.append(String.format("%n Error Message:  %s %n", ase.getMessage()));
-	       	   	err.append(String.format(" HTTP Status Code: %s %n", ase.getStatusCode()));
-	       	   	err.append(String.format(" AWS Error Code: %s %n", ase.getErrorCode()));
-	       	   	err.append(String.format(" Error Type: %s %n", ase.getErrorType()));
-	       	   	err.append(String.format(" Request ID: %s %n", ase.getRequestId()));
-	        	
-	       	   	System.out.println(err.toString());
-		} 
-		catch (AmazonClientException ace) {
-	            System.out.println("Caught an AmazonClientException, which means the client encountered "
-	                    + "a serious internal problem while trying to communicate with EC2 , "
-	                    + "such as not being able to access the network.");
-	            System.out.println("Error Message: " + ace.getMessage());
-		}
+		
+		catch (AmazonServiceException ase) {
+        	StringBuffer err = new StringBuffer();
+        	err.append(("Caught an AmazonServiceException, which means your request made it "
+                      + "to Amazon S3, but was rejected with an error response for some reason."));
+       	   	err.append(String.format("%n Error Message:  %s %n", ase.getMessage()));
+       	   	err.append(String.format(" HTTP Status Code: %s %n", ase.getStatusCode()));
+       	   	err.append(String.format(" AWS Error Code: %s %n", ase.getErrorCode()));
+       	   	err.append(String.format(" Error Type: %s %n", ase.getErrorType()));
+       	   	err.append(String.format(" Request ID: %s %n", ase.getRequestId()));
+        	
+    	} 
 		
 		if (s3Client != null) {
 			
@@ -113,16 +93,13 @@ public class Main {
 			ObjectOperations.InitObjectOperations(s3Client);
 			
 			// Instantiate the SimpleUI class and display menu.
-			sui = new SimpleUI();
+			SimpleUI sui = new SimpleUI();
 	
 			// Start processing user's input.
 			sui.processUserInput();
-		
 		}
 		else 
-			String.format("Error %s", "Main: authorized EC2 client object is null.");
-		
-		Utility.displayGoodbyeMessage("AWS S3");	
+			String.format("Error %s", "Main: authorized S3 client object is null.");
 	}
-
+	
 }
