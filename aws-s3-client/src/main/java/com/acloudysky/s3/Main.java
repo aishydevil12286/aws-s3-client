@@ -1,11 +1,12 @@
 package com.acloudysky.s3;
 
-import com.acloudysky.s3.ClientAuthentication;
 import com.amazonaws.AmazonServiceException;
-import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
+import com.amazonaws.regions.Region;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.acloudysky.auth.AwsClientAuthencation;
+import com.acloudysky.s3.Utility;
 
 
 /***
@@ -26,6 +27,14 @@ import com.amazonaws.services.s3.AmazonS3Client;
  */
 public class Main {
 
+	private static AmazonS3  s3Client = null;
+	
+	// Selected S3 region. Enumerated value.
+	private static Regions currentRegion; 
+	
+	// Selected region. String value such as "us-west-2".
+	private static String region = null;
+	
 	/**
 	 * Instantiate the S3 client, initialize the operation classes. 
 	 * Instantiate the SimpleUI class to display the selection menu and process the user's input. 
@@ -39,20 +48,23 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		
-		AmazonS3 s3Client = null;
+		
+		
 		String name = null, topic = null;
 		
+		// Display application menu.
+		Utility.displayWelcomeMessage("AWS S3");
+				
 		// Read input parameters.
 		try {
-				name = args[0];
-				topic = args[1];
+				region = args[0];
+				// System.out.println(region);
 		}
 		catch (Exception e) {
 			System.out.println("IO error trying to read application input! Assigning default values.");
 			// Assign default values if none are passed.
 			if (args.length==0) {
-				name = "User";
-				topic = "AWS S3 client console application";
+				region = "us-west-2";
 			}
 			else {
 				System.out.println("IO error trying to read application input!");
@@ -65,11 +77,14 @@ public class Main {
 		System.out.println(startGreetings);
 		
 		try {
-        	// Obtain authenticated S3 client.
-			s3Client = ClientAuthentication.getAuthorizedS3Client();
+			// Instantiate AwsClientAuthencation class.
+			AwsClientAuthencation s3ClientAuth = new AwsClientAuthencation();
+		
+			// Obtain authenticated EC2 client.
+			s3Client = s3ClientAuth.getAuthenticatedS3Client();
+			
 			// Set region.
-			Region usEast1 = Region.getRegion(Regions.US_EAST_1);
-	        ClientAuthentication.setS3Region(usEast1);
+			currentRegion = Utility.getRegion(region);
 		} 
 		
 		catch (AmazonServiceException ase) {
