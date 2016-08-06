@@ -30,7 +30,7 @@ public class Main {
 	private static AmazonS3  s3Client = null;
 	
 	// Selected S3 region. Enumerated value.
-	private static Regions currentRegion; 
+	private static Regions currentRegion = null;
 	
 	// Selected region. String value such as "us-west-2".
 	private static String region = null;
@@ -72,9 +72,6 @@ public class Main {
 			}
 		}
 		
-		// Print greeting message.
-		String startGreetings = String.format("Hello %s let's start %s", name, topic);
-		System.out.println(startGreetings);
 		
 		try {
 			// Instantiate AwsClientAuthencation class.
@@ -115,6 +112,9 @@ public class Main {
 		}
 		else 
 			String.format("Error %s", "Main: authorized S3 client object is null.");
+		
+
+		Utility.displayGoodbyeMessage("AWS S3");	
 	}
 	
 }
