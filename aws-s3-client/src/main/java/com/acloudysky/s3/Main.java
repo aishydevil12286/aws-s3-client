@@ -3,6 +3,7 @@ package com.acloudysky.s3;
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.regions.Region;
+import com.amazonaws.services.ec2.AmazonEC2;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.acloudysky.auth.AwsClientAuthencation;
@@ -49,9 +50,6 @@ public class Main {
 	public static void main(String[] args) {
 		
 		
-		
-		String name = null, topic = null;
-		
 		// Display application menu.
 		Utility.displayWelcomeMessage("AWS S3");
 				
@@ -74,14 +72,18 @@ public class Main {
 		
 		
 		try {
-			// Instantiate AwsClientAuthencation class.
-			AwsClientAuthencation s3ClientAuth = new AwsClientAuthencation();
-		
-			// Obtain authenticated EC2 client.
-			s3Client = s3ClientAuth.getAuthenticatedS3Client();
 			
-			// Set region.
-			currentRegion = Utility.getRegion(region);
+				// Instantiate AwsClientAuthencation class.
+				AwsClientAuthencation clientAuth = new AwsClientAuthencation();
+			
+				// Obtain authenticated S3 client.
+				s3Client = (AmazonS3) clientAuth.getAuthenticatedClient("s3");
+				
+				// Set region.
+				currentRegion = Utility.getRegion(region);
+				
+				if (currentRegion != null)
+					clientAuth.setClientRegion("s3", currentRegion);
 		} 
 		
 		catch (AmazonServiceException ase) {
@@ -99,7 +101,7 @@ public class Main {
 		if (s3Client != null) {
 			
 			// Initialize the BucketOperations class to handle related REST API calls.
-			BucketOperations.InitBucketOperations(s3Client);
+			BucketOperations.InitBucketOperations(s3Client); 
 			
 			// Initialize the ObjectOperations class to handle related REST API calls.
 			ObjectOperations.InitObjectOperations(s3Client);
