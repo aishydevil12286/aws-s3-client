@@ -14,18 +14,17 @@ For details see:
 Also, see the companion blog post at this location: <a href="http://acloudysky.com/build-aws-s3-client-application/" target="_blank">Build AWS S3 
 Client Application</a>.
 
-<h2>Prerequisites</h2>
-You must have Maven installed. The dependencies are satisfied by building the Maven package.
+## Prerequisites
+You must have Maven installed. The dependencies are satisfied by building the Maven package. Also assure to download the [aws-auth-client](https://github.com/milexm/aws-auth-client) project and include it in the client app project. If you use Eclipse to build the application (why not?) follow the steps describe at: [Include a Project](http://acloudysky.com/cloud-application-common-tasks/#include). 
 
-<h2>Security Credentials</h2>
+## Security Credentials
 You need to set up your AWS security credentials before the sample code is able to connect to AWS. You can do this by creating a file named "credentials" at ~/.aws/ (C:\Users\USER_NAME.aws\ for Windows users) and saving the following lines in the file:
 
     [default]
     	aws_access_key_id = <your access key>
     	aws_secret_access_key = <your secret key>
 
-
-<h2>Running the Example</h2>
+## Running the Example
 The application connects to Amazon's <a href="http://aws.amazon.com/s3" target="_blank">Simple Storage Service (S3)</a>, and allows the user to create a bucket, upload an object into the bucket, download the object, delete the object and delete the bucket. All you need to do is run it by following these steps:
  From the project, create an executable JAR
 2. From a terminal window, go to the directory containing the JAR and execute a command similar to the following: 
@@ -52,7 +51,7 @@ Assure that the pom.xml file has the following dependency, otherwise you'll get 
 See <a href="http://mvnrepository.com/artifact/joda-time/joda-time/2.8.1" target="_blank">Joda Time » 2.8.1</a>. 
 </p>
 
-<h2>License</h2>
+## License
 This sample application is distributed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>.
 [Apache License, Version 2.0](./LICENSE.h)
 
