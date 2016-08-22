@@ -31,6 +31,8 @@ The application connects to Amazon's <a href="http://aws.amazon.com/s3" target="
 
   		java -jar aws-s3-java.jar us-west-2
 
+See <a href="http://acloudysky.com/cloud-application-common-tasks/#createrunnablejar" target="_blank">Create Runnable JAR</a>.
+
 <span style="background-color:#ffffcc; color:red">Alternatively, you can use a tool like Eclipse to build the application and run it</span>
 
 
@@ -46,11 +48,9 @@ Assure that the pom.xml file has the following dependency, otherwise you'll get 
 </pre>
 </code>
 
-See <a href="http://mvnrepository.com/artifact/joda-time/joda-time/2.8.1" target="_blank">Joda Time » 2.8.1</a>.
+<p>See <a href="http://mvnrepository.com/artifact/joda-time/joda-time/2.8.1" target="_blank">Joda Time » 2.8.1</a>.</p>
 
-<p>
-	<b>Note</b>.  See <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html" target="_blank">Bucket Restrictions and Limitations</a>. See also <a href="http://acloudysky.com/cloud-application-common-tasks/#createrunnablejar" target="_blank">Create Runnable JAR</a>.
-</p>
+See <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html" target="_blank">Bucket Restrictions and Limitations</a>. 
 
 <h2>License</h2>
 This sample application is distributed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>.
