@@ -17,9 +17,7 @@ import com.acloudysky.s3.Utility;
  */
 public class SimpleUI extends UserInterface {
 	
-	private StringBuilder menu;
-	private static final String newline = System.getProperty("line.separator");
-	
+
 	private String bucketName, keyName;
 	
 	/**
