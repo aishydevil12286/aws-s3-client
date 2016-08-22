@@ -45,8 +45,9 @@ Assure that the pom.xml file has the following dependency, otherwise you'll get 
 	&lt;/dependency&gt;
 </pre>
 </code>
+
 See <a href="http://mvnrepository.com/artifact/joda-time/joda-time/2.8.1" target="_blank">Joda Time » 2.8.1</a>.
-</p>
+
 <p>
 	<b>Note</b>.  See <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html" target="_blank">Bucket Restrictions and Limitations</a>. See also <a href="http://acloudysky.com/cloud-application-common-tasks/#createrunnablejar" target="_blank">Create Runnable JAR</a>.
 </p>
