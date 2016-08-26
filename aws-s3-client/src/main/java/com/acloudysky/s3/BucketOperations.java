@@ -40,12 +40,12 @@ public class BucketOperations {
 	 * Initializes global status variables.
 	 * @param authorizedClient Client authorized to access the S3 service.
 	 */
-	public static void InitBucketOperations(AmazonS3 authorizedClient) {
+	public static void initBucketOperations(AmazonS3 authorizedClient) {
 		s3Client = authorizedClient;
 	}
 	
     /**
-     * Creates a bucket 
+     * Creates a bucket. <br> 
      * <b>Notes</b>
      *  <ul>
      *		<li>Amazon S3 bucket names are globally unique. 
@@ -57,7 +57,7 @@ public class BucketOperations {
      * @param bucketName The name of the bucket to create
      * @throws IOException Error encountered while creating the bucket
      */
-	public static void CreateBucket(String bucketName) throws IOException {			
+	public static void createBucket(String bucketName) throws IOException {			
 		
 		try {
             	System.out.println("Creating bucket " + bucketName + "\n");
@@ -89,7 +89,7 @@ public class BucketOperations {
 	 * Lists the buckets in the client's account.
 	 * @throws IOException Error encountered while listing buckets
 	 */
-	public static void ListBuckets() throws IOException {
+	public static void listBuckets() throws IOException {
 		
 		try {
 				List<Bucket> bucketList = s3Client.listBuckets();
@@ -130,12 +130,11 @@ public class BucketOperations {
 
 	
 	/**
-	 * Deletes a bucket
-	 * The name of the bucket to delete
+	 * Deletes a bucket.
 	 * @param bucketName The name of the bucket to delete
 	 * @throws IOException Error encountered while deleting the bucket
 	 */
-	public static void DeleteBucket(String bucketName) throws IOException {	
+	public static void deleteBucket(String bucketName) throws IOException {	
 		try {
 			
 			 	System.out.println(String.format("Deleting bucket %s %n", bucketName));
