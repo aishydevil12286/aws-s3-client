@@ -1,5 +1,13 @@
 package com.acloudysky.s3;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
@@ -25,8 +33,11 @@ public class Utility implements IUtility {
 	}
 		
 	
+	/**
+	 * Displays the available regions. 
+	 */
 	public static void displayRegions() {
-		Set<?> set = ec2Regions.entrySet();
+		Set<?> set = s3Regions.entrySet();
 	    Iterator<?> iterator = set.iterator();
 		while(iterator.hasNext()) {
 	         Map.Entry<?, ?> mentry = (Map.Entry<?,?>)iterator.next();
@@ -35,9 +46,14 @@ public class Utility implements IUtility {
 		} 
 	}
 	
+	/**
+	 * Gets the region related to the specifies key.
+	 * @param key The key representing the region to look for. For example, us-west-2.
+	 * @return The enumerated value representing the desired region. 
+	 */
 	public static Regions getRegion(String key) {
 		Regions currentRegion = null;
-		Set<?> set = ec2Regions.entrySet();
+		Set<?> set = s3Regions.entrySet();
 	    Iterator<?> iterator = set.iterator();
 		while(iterator.hasNext()) {
 	       Map.Entry<?, ?> mentry = (Map.Entry<?,?>)iterator.next();
@@ -112,11 +128,55 @@ public class Utility implements IUtility {
 		 return environment;
 	 }
 	 
+	 
+	 /**
+	  * Gets the specified resource file
+	  * @param fileName The name of the resource file.
+	  * @return The resource file.
+	  * <b>Note</b>. The file should exist in the project resources folder. 
+	  */
+	 public static File getResourceFile(String fileName){
+		 
+		 File resourceFile = null;
+		 
+		 URL resource = Utility.class.getResource("/" + fileName);
+		 
+		 // Test
+		 // System.out.println(String.format("File name is: %s", fileName));
+		 // System.out.println(String.format("URL is: %s", resource.toString()));
+		 
+		 try {
+			resourceFile = Paths.get(resource.toURI()).toFile();
+		 } catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		 }	
+		 
+		 return resourceFile;
+		 
+	 }
+	 
+	 /**
+      * Displays the contents of the specified input stream as text.
+      * @param input The input stream to display as text.
+      * @throws IOException Error encountered while handling the stream.
+      */
+    public static void displayTextInputStream(InputStream input) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+        while (true) {
+            String line = reader.readLine();
+            if (line == null) break;
+
+            System.out.println("    " + line);
+        }
+        System.out.println();
+    }
+	 
 	 /*************************
 	  ** Internal utilities. **
 	  *************************/
 	 
-	 /**
+	 /*
 	  * Creates the header to display.
 	  * @param headerText The text to display in the header.
 	  * @param length The length of the header.  
@@ -137,7 +197,7 @@ public class Utility implements IUtility {
 	     return header;
 	 }
 	 
-	 /**
+	 /*
 	  * Creates the divider line.
 	  * @param c The character to use to create the divider line.
 	  * @param length The length of the divider line.
