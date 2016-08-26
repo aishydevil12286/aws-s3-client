@@ -8,18 +8,18 @@ import com.acloudysky.s3.Utility;
 
 
 /***
- *Instantiate the S3 authorized service client, initialize the operations and the UI classes.  
- *Before running the code, you need to set up your AWS security credentials. You can do this by creating a 
- *file named "credentials" at ~/.aws/ (C:\Users\USER_NAME.aws\ for Windows users) and saving the following lines in 
- *the file:
- *<pre>
- *[default]
- *aws_access_key_id = your access key id
- *aws_secret_access_key = your secret key
- *</pre>
- *For more information, see <a href="http://docs.aws.amazon.com/AWSSdkDocsJava/latest/DeveloperGuide/credentials.html" target="_blank">Providing AWS Credentials in the AWS SDK for Java</a> 
- *and <a href="https://console.aws.amazon.com/iam/home?#security_credential" target="_blank">Welcome to Identity and Access Management</a>.
- *<b>WARNING</b>: To avoid accidental leakage of your credentials, DO NOT keep the credentials file in your source directory.
+ * Instantiates the S3 authenticated service client, initializes the operations and the UI classes.  
+ * Before running the code, you need to set up your AWS security credentials. You can do this by creating a 
+ * file named "credentials" at <i>~/.aws/</i> (<i>C:\Users\USER_NAME.aws\</i> for Windows users) and saving the following lines in 
+ * the file:
+ * <pre>
+ *   [default]
+ *   aws_access_key_id = your access key id
+ *   aws_secret_access_key = your secret key
+ * </pre>
+ * For more information, see <a href="http://docs.aws.amazon.com/AWSSdkDocsJava/latest/DeveloperGuide/credentials.html" target="_blank">Providing AWS Credentials in the AWS SDK for Java</a> 
+ * and <a href="https://console.aws.amazon.com/iam/home?#security_credential" target="_blank">Welcome to Identity and Access Management</a>.
+ * <b>WARNING</b>: To avoid accidental leakage of your credentials, DO NOT keep the credentials file in your source directory.
  * @author Michael Miele
  *
  */
@@ -34,15 +34,13 @@ public class Main {
 	private static String region = null;
 	
 	/**
-	 * Instantiate the S3 client, initialize the operation classes. 
-	 * Instantiate the SimpleUI class to display the selection menu and process the user's input. 
+	 * Instantiates the S3 client, initializes the operation classes. 
+	 * Instantiates the SimpleUI class to display the selection menu and process the user's input. 
 	 * @see SimpleUI#SimpleUI()
-	 * @see BucketOperations#InitBucketOperations(AmazonS3)
-	 * @see ObjectOperations#InitObjectOperations(AmazonS3)
+	 * @see BucketOperations#initBucketOperations(AmazonS3)
+	 * @see ObjectOperations#initObjectOperations(AmazonS3)
 	 * @param args; 
-	 *  args[0] = Your name
-	 *  args[1] = Greeting message
-	 * 
+	 *  args[0] = region (key) for example, us-west-2
 	 */
 	public static void main(String[] args) {
 		
@@ -98,10 +96,10 @@ public class Main {
 		if (s3Client != null) {
 			
 			// Initialize the BucketOperations class to handle related REST API calls.
-			BucketOperations.InitBucketOperations(s3Client); 
+			BucketOperations.initBucketOperations(s3Client); 
 			
 			// Initialize the ObjectOperations class to handle related REST API calls.
-			ObjectOperations.InitObjectOperations(s3Client);
+			ObjectOperations.initObjectOperations(s3Client);
 			
 			// Instantiate the SimpleUI class and display menu.
 			SimpleUI sui = new SimpleUI();
