@@ -8,10 +8,13 @@ import com.acloudysky.s3.Utility;
 
 
 /*** 
- * Display a selection menu for the user. Process the
- * user's input and call the proper method based on the user's selection.
- * Each method calls the related 
+ * Displays a selection menu for the user. Processes the  user's input and calls the proper 
+ * method based on the user's selection. 
+ * Each method calls the related S3 REST API.
+ * <p>
+ * For more information, see:
  * <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/Welcome.html" target="_blank">AWS S3 API</a>.
+ * </p>
  * @author Michael Miele.
  *
  */
@@ -30,8 +33,8 @@ public class SimpleUI extends UserInterface {
 		
 	}
 	
-	/**
-	 * Read user input.
+	/*
+	 * Reads user input.
 	 */
 	private static String readUserInput(String msg) {
 		
@@ -58,8 +61,8 @@ public class SimpleUI extends UserInterface {
 
 	}
 	
-	/**
-	 * Execute the selected operation.
+	/*
+	 * Executes the selected operation.
 	 */
 	private void performOperation(String operation) {
 	
@@ -74,7 +77,7 @@ public class SimpleUI extends UserInterface {
 						System.out.println(String.format("%s", "The bucket name must follow the format: chowx-i-92aea747.d.eanitea.com"));
 						bucketName = readUserInput("Bucket name: ").toLowerCase();	
 					} while(bucketName.isEmpty());
-					BucketOperations.CreateBucket(bucketName);
+					BucketOperations.createBucket(bucketName);
 				}
 				catch (Exception e){
 					System.out.println(String.format("%s", e.getMessage()));
@@ -85,7 +88,7 @@ public class SimpleUI extends UserInterface {
 			case "lb": {
 				try{
 					// List the buckets contained in the account.
-					BucketOperations.ListBuckets();
+					BucketOperations.listBuckets();
 				}
 				catch (Exception e){
 					System.out.println(String.format("%s", e.getMessage()));
@@ -99,7 +102,7 @@ public class SimpleUI extends UserInterface {
 					do {
 						bucketName = readUserInput("Bucket name: ").toLowerCase();	
 					}while(bucketName.isEmpty());	
-					BucketOperations.DeleteBucket(bucketName);
+					BucketOperations.deleteBucket(bucketName);
 				}
 				catch (Exception e){
 					System.out.println(String.format("%s", e.getMessage()));
@@ -110,11 +113,13 @@ public class SimpleUI extends UserInterface {
 			case "uo": {
 				try{
 					// Upload an object in the specified bucket.
+					// Note that the object to upload ia a text file that must already
+					// exist in the resources folder. 
 					do {
 						bucketName = readUserInput("Bucket name: ").toLowerCase();	
-						keyName = readUserInput("Key name: ").toLowerCase();	
+						keyName = readUserInput("Object (key) name: ").toLowerCase();	
 					}while(bucketName.isEmpty() || keyName.isEmpty());
-					ObjectOperations.UploadObject(bucketName, keyName);
+					ObjectOperations.uploadObject(bucketName, keyName, "sanmartino.txt");
 				}
 				catch (Exception e){
 					System.out.println(String.format("%s", e.getMessage()));
@@ -127,9 +132,9 @@ public class SimpleUI extends UserInterface {
 					// Download an object.
 					do {
 						bucketName = readUserInput("Bucket name: ").toLowerCase();	
-						keyName = readUserInput("Key name: ").toLowerCase();	
+						keyName = readUserInput("Object (key) name: ").toLowerCase();	
 					}while(bucketName.isEmpty() || keyName.isEmpty());
-					ObjectOperations.DownloadObject(bucketName, keyName);
+					ObjectOperations.downloadObject(bucketName, keyName);
 				}
 				catch (Exception e){
 					System.out.println(String.format("%s", e.getMessage()));
@@ -143,7 +148,7 @@ public class SimpleUI extends UserInterface {
 					do {
 						bucketName = readUserInput("Bucket name: ").toLowerCase();	
 					}while(bucketName.isEmpty());
-					ObjectOperations.ListObject(bucketName);
+					ObjectOperations.listObject(bucketName);
 				}
 				catch (Exception e){
 					System.out.println(String.format("%s", e.getMessage()));
@@ -156,9 +161,9 @@ public class SimpleUI extends UserInterface {
 					// Delete an object.
 					do {
 						bucketName = readUserInput("Bucket name: ").toLowerCase();	
-						keyName = readUserInput("Key name: ").toLowerCase();	
+						keyName = readUserInput("Object (key) name: ").toLowerCase();	
 					}while(bucketName.isEmpty() || keyName.isEmpty());
-					ObjectOperations.DeleteObject(bucketName, keyName);
+					ObjectOperations.deleteObject(bucketName, keyName);
 				}
 				catch (Exception e){
 					System.out.println(String.format("%s", e.getMessage()));
@@ -178,8 +183,8 @@ public class SimpleUI extends UserInterface {
 	
 	
 	/***
-	 * Get user selection and call the related method.
-	 * Loop indefinitely until the user exits the application.
+	 * Gets user selection and calls the related method.
+	 * Loops indefinitely until the user exits the application.
 	 */
 	public void processUserInput() {
 		
