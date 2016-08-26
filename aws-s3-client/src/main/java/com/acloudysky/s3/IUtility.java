@@ -50,10 +50,10 @@ public interface IUtility {
 	);
 	
 	/**
-	 * AWS EC2 US regions  
+	 * AWS S3 US regions  
 	 * <b>Note</b>: Only US regions are used, for simplicity.
 	 */
-	HashMap<String, Enum<Regions>> ec2Regions = new HashMap<String, Enum<Regions>>()
+	HashMap<String, Enum<Regions>> s3Regions = new HashMap<String, Enum<Regions>>()
 	{ 
 		// Avoid compiler warning. 
 		private static final long serialVersionUID = 1L;
