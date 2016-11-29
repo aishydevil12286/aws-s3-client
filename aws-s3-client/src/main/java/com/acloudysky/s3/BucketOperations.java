@@ -63,6 +63,8 @@ public class BucketOperations {
             	System.out.println("Creating bucket " + bucketName + "\n");
             	// Create the bucket.
             	s3Client.createBucket(bucketName);
+            	String region = s3Client.getBucketLocation(bucketName); 
+            	System.out.println(String.format("Created bucket %s in region %s", bucketName, region));
             }
         	catch (AmazonServiceException ase) {
 	        	StringBuffer err = new StringBuffer();
@@ -92,6 +94,7 @@ public class BucketOperations {
 	public static void listBuckets() throws IOException {
 		
 		try {
+				
 				List<Bucket> bucketList = s3Client.listBuckets();
 				if (!bucketList.isEmpty()) {
 					System.out.println("Listing buckets");
@@ -131,6 +134,9 @@ public class BucketOperations {
 	
 	/**
 	 * Deletes a bucket.
+	 * <p><bNote.</b> A bucket must be completely empty before it can be
+	 * deleted, so remember to delete any objects from your bucket before
+	 * you try to delete it.</p>
 	 * @param bucketName The name of the bucket to delete
 	 * @throws IOException Error encountered while deleting the bucket
 	 */
@@ -157,12 +163,8 @@ public class BucketOperations {
 	                S3VersionSummary s = (S3VersionSummary)iterator.next();
 	                s3Client.deleteVersion(bucketName, s.getKey(), s.getVersionId());
 	            }
-	            /*
-	             * Delete the bucket - A bucket must be completely empty before it can be
-	             * deleted, so remember to delete any objects from your buckets before
-	             * you try to delete them.
-	             */
-	            s3Client.deleteBucket(bucketName);
+	          
+	           
             
         } catch (MultiObjectDeleteException  ase) {
         	StringBuffer buffer = new StringBuffer();
